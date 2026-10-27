@@ -1,0 +1,20 @@
+/* Franja de prototipo para la revisión con el cliente.
+   Se carga después de landing_v02.css; para producción basta con quitar este archivo y el div .proto-bar. */
+
+:root { --proto-h: 28px; }
+
+.proto-bar { position: fixed; inset: 0 0 auto; z-index: 60; height: var(--proto-h); display: flex; align-items: center; justify-content: center; gap: .6em;
+  background: #f2f0ec; color: #121212; font-family: var(--mono); font-size: .6875rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.proto-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-ink); }
+.proto-more { color: #5c5a56; }
+
+.site-header { top: var(--proto-h); }
+html { scroll-padding-top: calc(var(--header-h) + var(--proto-h)); }
+.hero { padding-top: calc(var(--header-h) + var(--proto-h)); }
+.menu { inset: calc(var(--header-h) + var(--proto-h)) 0 0; }
+.split-head { top: calc(var(--header-h) + var(--proto-h) + var(--s7)); }
+.summary { top: calc(var(--header-h) + var(--proto-h) + var(--s5)); }
+.scrolly-pin { top: calc(var(--header-h) + var(--proto-h)); height: calc(100svh - var(--header-h) - var(--proto-h)); }
+
+@media (max-width: 760px) { .proto-more { display: none; } }
+@media print { .proto-bar { display: none; } }
