@@ -1,4 +1,4 @@
-/* JM × LifeSmart · Landing Construmedia 2026 · v02
+/* JM × LifeSmart · Landing Construmedia 2026 · v03 (v02 + ajustes de Gregory: stand 68, Blend, Nature X, alarma)
    Sistema: negro de marca + naranja LifeSmart como acento escaso (<5 %), Manrope + IBM Plex Mono,
    hairlines de 1 px y retícula de 12 columnas. Todo el sitio consume estos tokens. */
 
@@ -490,3 +490,7 @@ sup { font-size: .6em; vertical-align: super; line-height: 0; }
   body.print-quote .quote-total { box-shadow: inset 0 0 0 1px #ddd; }
   body.print-quote .no-print { display: none !important; }
 }
+
+/* v03 · Panel Nature + Nature X en una misma ficha */
+.product-duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); background: none; }
+.product-duo img { height: 100%; object-fit: cover; border-radius: var(--r-md); }

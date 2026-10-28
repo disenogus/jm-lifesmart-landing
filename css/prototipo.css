@@ -1,5 +1,5 @@
 /* Franja de prototipo para la revisión con el cliente.
-   Se carga después de landing_v02.css; para producción basta con quitar este archivo y el div .proto-bar. */
+   Se carga después de landing_v03.css; para producción basta con quitar este archivo y el div .proto-bar. */
 
 :root { --proto-h: 28px; }
 

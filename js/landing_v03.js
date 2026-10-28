@@ -1,4 +1,4 @@
-/* JM × LifeSmart · Landing Construmedia 2026 · v02
+/* JM × LifeSmart · Landing Construmedia 2026 · v03
    JS vanilla con mejora progresiva: sin JS el contenido se lee completo.
    PRECIOS y CONTACTO = datos de ejemplo para el prototipo (validar con JM antes de publicar). */
 
@@ -178,7 +178,7 @@ function buildIso(svg) {
   lights.forEach(([x, y]) => line(g, "wire", [x, 5.4, zc], [x, y, zc]));
   lights.forEach(([x, y]) => { ring(g, "pool", x, y, 0, .7); dot(g, x, y, zc); });
   dot(g, 0, 5.4, 1.2);
-  label(g, 0, 5.4, 1.2, "STARRY", -30, 28);
+  label(g, 0, 5.4, 1.2, "BLEND", -30, 28);
 
   // 03 Climatización: equipos en el muro del fondo + flujo de aire + termostato
   g = layer("clima");
@@ -466,14 +466,14 @@ function initIcs() {
   if (!a) return;
   const ics = [
     "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//JM Security System//Construmedia 2026//ES",
-    "BEGIN:VEVENT", "UID:construmedia2026-stand70@jmsecuritysystem.com", "DTSTAMP:20261027T000000Z",
+    "BEGIN:VEVENT", "UID:construmedia2026-stand68@jmsecuritysystem.com", "DTSTAMP:20261028T000000Z",
     "DTSTART;VALUE=DATE:20261113", "DTEND;VALUE=DATE:20261116",
-    "SUMMARY:LifeSmart × JM · Stand 70 · Construmedia 2026",
+    "SUMMARY:LifeSmart × JM · Stand 68 · Construmedia 2026",
     "LOCATION:Feria Inmobiliaria Construmedia\\, Santo Domingo",
-    "DESCRIPTION:Domótica y seguridad en vivo: cerradura C100\\, panel Nature e interruptores Starry.",
+    "DESCRIPTION:Domótica y seguridad en vivo: cerradura C100\\, panel Nature e interruptores Blend.",
     "END:VEVENT", "END:VCALENDAR"].join("\r\n");
   a.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
-  a.download = "Construmedia2026_Stand70.ics";
+  a.download = "Construmedia2026_Stand68.ics";
 }
 
 /* ---------- Reveals ---------- */
