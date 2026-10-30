@@ -1,5 +1,5 @@
 /* Franja de prototipo para la revisión con el cliente.
-   Se carga después de landing_v03.css; para producción basta con quitar este archivo y el div .proto-bar. */
+   Se carga después de landing_v04.css; para producción basta con quitar este archivo y el div .proto-bar. */
 
 :root { --proto-h: 28px; }
 
@@ -18,3 +18,4 @@ html { scroll-padding-top: calc(var(--header-h) + var(--proto-h)); }
 
 @media (max-width: 760px) { .proto-more { display: none; } }
 @media print { .proto-bar { display: none; } }
+.proto { top: calc(var(--header-h) + var(--proto-h) + var(--s5)); }

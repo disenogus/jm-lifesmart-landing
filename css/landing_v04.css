@@ -1,4 +1,4 @@
-/* JM × LifeSmart · Landing Construmedia 2026 · v03 (v02 + ajustes de Gregory: stand 68, Blend, Nature X, alarma)
+/* JM × LifeSmart · Landing Construmedia 2026 · v04 (v03 + calculadora Hogar/Negocio, casa de 2 plantas, Nature X propio, mapa de la feria)
    Sistema: negro de marca + naranja LifeSmart como acento escaso (<5 %), Manrope + IBM Plex Mono,
    hairlines de 1 px y retícula de 12 columnas. Todo el sitio consume estos tokens. */
 
@@ -494,3 +494,137 @@ sup { font-size: .6em; vertical-align: super; line-height: 0; }
 /* v03 · Panel Nature + Nature X en una misma ficha */
 .product-duo { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); background: none; }
 .product-duo img { height: 100%; object-fit: cover; border-radius: var(--r-md); }
+
+/* =========================================================
+   v04 · 02 Sistema — casa de dos plantas (despiece)
+   ========================================================= */
+.iso .void { fill: var(--bg); stroke: rgba(255, 255, 255, .14); stroke-width: 1; }
+.iso .guide { fill: none; stroke: rgba(255, 255, 255, .2); stroke-width: 1; stroke-dasharray: .03 .03; }
+.iso .flr { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; fill: var(--ink-3); }
+@media (max-width: 760px) { .iso .flr { font-size: 18px; } }
+
+/* =========================================================
+   v04 · 04 Soluciones — equipos bajo cada solución
+   ========================================================= */
+.matrix tbody th .th-in > span { display: grid; gap: 2px; }
+.th-dev { font-size: .75rem; font-weight: 400; color: var(--ink-3); line-height: 1.35; }
+
+/* =========================================================
+   v04 · 05 Calculadora — Hogar / Negocio, barras, burbujas y prototipo isométrico
+   ========================================================= */
+.calc-form { grid-column: 1 / span 6; }
+.proto { grid-column: 8 / span 5; position: sticky; top: calc(var(--header-h) + var(--s5)); background: var(--bg); color: var(--ink);
+  border-radius: var(--r-md); padding: var(--s5); display: grid; gap: var(--s4); }
+.proto-head { display: grid; gap: var(--s1); }
+.proto-desc { font-weight: 600; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.proto-stage { margin-inline: calc(var(--s5) * -1); border-block: 1px solid var(--line); }
+.proto-iso { display: block; width: 100%; height: clamp(200px, 30vh, 270px); overflow: visible; }
+.proto-legend { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s4); }
+.proto-legend li { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: var(--s2); font-size: .875rem; line-height: 1.3; color: var(--ink); }
+.proto-legend li .i { color: var(--accent); width: 1.05em; height: 1.05em; margin-top: 1px; }
+.proto-legend em { display: block; font-style: normal; color: var(--ink-3); font-size: .75rem; font-variant-numeric: tabular-nums; }
+.proto-legend .is-empty { display: block; grid-column: 1 / -1; color: var(--ink-3); }
+.proto-budget { display: grid; gap: var(--s1); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.proto .btn[disabled] { opacity: .45; cursor: not-allowed; filter: none; }
+
+/* Paso 1: segmento A/B + tipo de inmueble */
+.seg2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.seg2 label, .types label { position: relative; cursor: pointer; }
+.seg2 input, .types input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg2 span { display: grid; grid-template-columns: auto 1fr; gap: 2px var(--s3); align-items: center; min-height: 84px; padding: var(--s4) var(--s5);
+  border-radius: var(--r-sm); background: #fff; box-shadow: inset 0 0 0 1px var(--line-dark); transition: box-shadow var(--t-fast), background var(--t-fast); }
+.seg2 .i { grid-row: span 2; width: 1.6rem; height: 1.6rem; color: var(--ink-dark-2); }
+.seg2 b { font-weight: 600; font-size: 1.0625rem; letter-spacing: -.01em; }
+.seg2 b em { font-style: normal; font-family: var(--mono); font-size: .8125rem; color: var(--accent-ink); margin-right: .2em; }
+.seg2 i { font-style: normal; font-size: .8125rem; color: var(--ink-dark-2); line-height: 1.35; }
+.seg2 input:checked + span { box-shadow: inset 0 0 0 2px var(--ink-dark); }
+.seg2 input:checked + span .i { color: var(--accent-ink); }
+.types { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s2); }
+.types span { display: inline-flex; align-items: center; gap: .3em; min-height: 44px; padding: 0 var(--s4); border-radius: var(--r-pill);
+  background: #fff; box-shadow: inset 0 0 0 1px var(--line-dark); font-size: var(--fs-small); font-weight: 500; transition: box-shadow var(--t-fast), background var(--t-fast), color var(--t-fast); }
+.types small { color: var(--ink-dark-2); font-weight: 400; }
+.types input:checked + span { background: var(--ink-dark); color: #fff; box-shadow: none; }
+.types input:checked + span small { color: rgba(255, 255, 255, .65); }
+.seg2 input:focus-visible + span, .types input:focus-visible + span, .bubble:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.types-note { font-size: var(--fs-small); color: var(--ink-dark-2); padding-left: var(--s3); border-left: 2px solid var(--accent); }
+
+/* Paso 2: barras */
+.range-field input:disabled { opacity: .4; }
+.range-ends { grid-column: 1 / -1; display: flex; justify-content: space-between; margin-top: -6px; font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; color: var(--ink-dark-2); }
+
+/* Paso 3: burbujas */
+.step legend { width: 100%; }
+.step legend .link-reco { margin-left: auto; padding: 0; border: 0; background: none; cursor: pointer; font-size: .8125rem; font-weight: 500;
+  color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; }
+.bubbles { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.bubble { position: relative; display: inline-flex; align-items: center; gap: var(--s2); min-height: 48px; padding: 0 var(--s5) 0 var(--s4);
+  border: 0; border-radius: var(--r-pill); background: #fff; color: var(--ink-dark); box-shadow: inset 0 0 0 1px var(--line-dark);
+  font-size: var(--fs-small); font-weight: 500; cursor: pointer; transition: background var(--t-fast) var(--ease), color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast) var(--ease); }
+.bubble .i { color: var(--ink-dark-2); width: 1.15em; height: 1.15em; }
+.bubble:hover { box-shadow: inset 0 0 0 1px var(--ink-dark); }
+.bubble:active { transform: scale(.97); }
+.bubble[aria-pressed="true"] { background: var(--ink-dark); color: #fff; box-shadow: none; }
+.bubble[aria-pressed="true"] .i { color: var(--accent); }
+.bubble-reco { position: absolute; top: 7px; right: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0; transition: opacity var(--t-fast); }
+.bubble.is-reco .bubble-reco { opacity: 1; }
+.hint { display: flex; align-items: baseline; gap: var(--s2); }
+.reco-dot { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); transform: translateY(-2px); }
+
+/* Prototipo isométrico (SVG en metros; trazos de grosor fijo) */
+.proto-iso polygon, .proto-iso polyline, .proto-iso circle { vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.proto-iso .p-shadow { fill: rgba(255, 255, 255, .025); stroke: rgba(255, 255, 255, .12); stroke-width: 1; stroke-dasharray: 3 4; }
+.proto-iso .p-lot { fill: rgba(255, 255, 255, .03); stroke: rgba(255, 255, 255, .25); stroke-width: 1; stroke-dasharray: 5 5; }
+.proto-iso .p-tree { fill: rgba(255, 255, 255, .04); stroke: rgba(255, 255, 255, .2); stroke-width: 1; }
+.proto-iso .p-tree-c { fill: rgba(255, 255, 255, .3); }
+.proto-iso .p-plate { fill: rgba(255, 255, 255, .035); stroke: rgba(255, 255, 255, .34); stroke-width: 1; }
+.proto-iso .p-face { fill: rgba(255, 255, 255, .03); stroke: rgba(255, 255, 255, .16); stroke-width: 1; }
+.proto-iso .p-face-r { fill: rgba(255, 255, 255, .05); }
+.proto-iso .p-band { fill: none; stroke: rgba(255, 255, 255, .12); stroke-width: 1; }
+.proto-iso .p-edge { fill: none; stroke: rgba(255, 255, 255, .3); stroke-width: 1; }
+.proto-iso .p-top { fill: rgba(255, 255, 255, .07); stroke: rgba(255, 255, 255, .45); stroke-width: 1; }
+.proto-iso .p-dot { fill: var(--accent); }
+.proto-iso .p-ring { fill: none; stroke: var(--accent); stroke-width: 1; }
+.proto-iso .p-siren { fill: rgba(242, 140, 60, .35); stroke: var(--accent); stroke-width: 1.2; }
+.proto-iso .p-unit { fill: rgba(242, 140, 60, .2); stroke: var(--accent); stroke-width: 1.2; }
+.proto-iso .p-air, .proto-iso .p-fold { fill: none; stroke: var(--accent); stroke-width: 1; opacity: .6; }
+.proto-iso .p-track { fill: none; stroke: var(--accent); stroke-width: 2.2; }
+.proto-iso .p-wave { fill: none; stroke: var(--accent); stroke-width: 1; opacity: .55; }
+.proto-iso .p-door { fill: rgba(242, 140, 60, .28); stroke: var(--accent); stroke-width: 1.4; }
+.proto-iso .p-cone { fill: rgba(242, 140, 60, .1); stroke: rgba(242, 140, 60, .5); stroke-width: 1; }
+.proto-iso .p-riser { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 4 3; }
+.proto-iso .p-solar { fill: rgba(242, 140, 60, .16); stroke: var(--accent); stroke-width: 1; }
+.proto-iso .p-floor.is-new { animation: floorIn 520ms var(--ease) both; animation-delay: var(--d); }
+.proto-iso .p-sol.is-new { animation: solIn 600ms var(--ease) both; }
+@keyframes floorIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@keyframes solIn { 0% { opacity: 0; } 40% { opacity: 1; filter: drop-shadow(0 0 6px rgba(242, 140, 60, .9)); } 100% { opacity: 1; filter: none; } }
+
+/* =========================================================
+   v04 · 06 Stand — mapa del Salón Regency
+   ========================================================= */
+.feria { grid-column: 1 / span 7; margin: 0; display: grid; gap: var(--s3); }
+.feria-map { display: block; width: 100%; height: auto; border-radius: var(--r-md); background: var(--bg-alt); }
+.feria figcaption { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.fm-hall { fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: 1.5; }
+.fm-stands rect { fill: rgba(255, 255, 255, .03); stroke: rgba(255, 255, 255, .2); stroke-width: 1; }
+.fm-stands text { font-family: var(--mono); font-size: 13px; letter-spacing: .06em; fill: var(--ink-3); text-anchor: middle; }
+.fm-hall-name { font-family: var(--mono); font-size: 13px; letter-spacing: .3em; fill: var(--ink-2); text-anchor: middle; }
+.fm-here rect { fill: rgba(242, 140, 60, .22); stroke: var(--accent); stroke-width: 2; }
+.fm-here text { font-family: var(--font); font-weight: 700; font-size: 26px; fill: var(--accent); text-anchor: middle; letter-spacing: -.02em; }
+.fm-pulse { fill: none; stroke: var(--accent); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: fmPulse 2.4s var(--ease) infinite; }
+@keyframes fmPulse { 0% { transform: scale(.6); opacity: .9; } 80%, 100% { transform: scale(1.9); opacity: 0; } }
+.fm-tag line { stroke: var(--accent); stroke-width: 1.5; }
+.fm-tag rect { fill: var(--accent); }
+.fm-tag text { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; fill: #111; text-anchor: middle; }
+
+@media (max-width: 1080px) {
+  .calc-form, .proto { grid-column: 1 / -1; }
+  .proto { position: static; }
+}
+@media (max-width: 760px) {
+  .seg2 { grid-template-columns: 1fr; }
+  .seg2 span { min-height: 68px; }
+  .feria { grid-column: 1; }
+  .proto-iso { height: 240px; }
+  .fm-stands text { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .fm-pulse, .proto-iso .is-new { animation: none; } }
