@@ -1,4 +1,4 @@
-/* JM × LifeSmart · Landing Construmedia 2026 · v04
+/* JM × LifeSmart · Landing Construmedia 2026 · v05
    JS vanilla con mejora progresiva: sin JS el contenido se lee completo.
    PRECIOS y CONTACTO = datos de ejemplo para el prototipo (validar con JM antes de publicar). */
 
@@ -15,7 +15,8 @@ const CONFIG = {
   // y el cliente recibe su cotización por correo.
   leadsEndpoint: "",
   storageKey: "jm_leads_v1",
-  whatsappJM: "18090000000",          // placeholder: número de ventas de JM sin “+”
+  whatsappJM: "18094752210",          // WhatsApp de JM (809-475-2210) sin “+”
+  correoJM: "info@jmsecuritysystem.com", // destino de las solicitudes (lo usa el Apps Script del endpoint)
 };
 
 /* ---------- Datos: capas del sistema (scroll y matriz de niveles) ---------- */
@@ -39,7 +40,8 @@ const rangeTxt = (a, b) => `${money(a)}–${money(b).replace("US$ ", "")}`;
 
 function initHeader() {
   const header = $("[data-header]");
-  const onScroll = () => header.classList.toggle("is-solid", window.scrollY > 24);
+  // Arriba del todo la cabecera va sobre el hero blanco: logos y menú en oscuro
+  const onScroll = () => { const solid = window.scrollY > 24; header.classList.toggle("is-solid", solid); header.classList.toggle("on-light", !solid); };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -49,6 +51,7 @@ function initHeader() {
     menu.hidden = !open;
     document.body.style.overflow = open ? "hidden" : "";
     header.classList.toggle("is-solid", open || window.scrollY > 24);
+    header.classList.toggle("on-light", !open && window.scrollY <= 24);
   };
   btn.addEventListener("click", () => setMenu(btn.getAttribute("aria-expanded") !== "true"));
   $$("a", menu).forEach(a => a.addEventListener("click", () => setMenu(false)));
@@ -622,14 +625,14 @@ async function saveLead(lead) {
 }
 
 function initLead(getState) {
-  const lead = $("[data-lead]"), sum = $("[data-lead-sum]"), quote = $("[data-quote]");
+  const lead = $("[data-lead]"), sum = $("[data-lead-sum]"), thanks = $("[data-thanks]");
   const submit = $("[data-lead-submit]"), err = $("[data-lead-err]");
   const solNames = s => s.sols.map(k => SOLUTIONS[k].name).join(", ");
   const equipos = s => s.items.map(it => SOLUTIONS[it.k].unit(it.n)).join(" · ");
 
   $("[data-open-lead]").addEventListener("click", () => {
     const s = getState();
-    lead.hidden = false; quote.hidden = true;
+    lead.hidden = false; thanks.hidden = true;
     sum.textContent = `${describe(s)} · ${s.sols.length} soluciones · ${rangeTxt(s.lo, s.hi)}.`;
     lead.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
     setTimeout(() => $("input[name=nombre]", lead).focus({ preventScroll: true }), 500);
@@ -646,6 +649,7 @@ function initLead(getState) {
     if (first) { err.textContent = "Revisa los campos marcados."; first.focus(); return; }
     err.textContent = "";
 
+    // Toda la solicitud viaja al correo de JM (CONFIG.correoJM) vía el endpoint; el cliente solo ve el gracias
     const s = getState(), d = Object.fromEntries(new FormData(lead));
     const record = {
       folio: folio(), fecha: new Date().toISOString(),
@@ -657,37 +661,23 @@ function initLead(getState) {
       origen: new URLSearchParams(location.search).get("utm_content") || "web",
     };
 
-    submit.disabled = true; submit.textContent = "Generando…";
+    submit.disabled = true; submit.textContent = "Enviando…";
     const res = await saveLead(record);
-    submit.disabled = false; submit.textContent = "Generar mi cotización";
+    submit.disabled = false; submit.textContent = "Enviar solicitud";
     if (!res.ok) { err.textContent = "No pudimos enviarla. Inténtalo de nuevo o escríbenos por WhatsApp."; return; }
 
-    renderQuote(record, s);
-    lead.hidden = true; quote.hidden = false;
-    quote.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    const nombre = record.nombre.split(" ")[0];
+    $("[data-thanks-t]").textContent = `¡Gracias, ${nombre}! Ya estamos revisando tu proyecto.`;
+    $("[data-thanks-folio]").textContent = record.folio;
+    const msg = `Hola JM, soy ${record.nombre}. Acabo de enviar mi solicitud ${record.folio}: ${describe(s)}, ${record.soluciones.toLowerCase()}.`;
+    $("[data-thanks-wa]").href = `https://wa.me/${CONFIG.whatsappJM}?text=${encodeURIComponent(msg)}`;
+    lead.hidden = true; thanks.hidden = false;
+    thanks.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    thanks.focus({ preventScroll: true });
   });
 
-  function renderQuote(q, s) {
-    const fecha = new Date(q.fecha).toLocaleDateString("es-DO", { day: "numeric", month: "long", year: "numeric" });
-    $("[data-q-folio]").textContent = q.folio;
-    $("[data-q-for]").textContent = `Para ${q.nombre}${q.empresa ? " · " + q.empresa : ""} · ${q.perfil}`;
-    $("[data-q-proyecto]").textContent = `${q.segmento} · ${describe(s)} · ${q.etapa}`;
-    $("[data-q-capas]").textContent = q.soluciones;
-    $("[data-q-equipos]").textContent = q.equipos;
-    $("[data-q-fecha]").textContent = fecha;
-    $("[data-q-rango]").textContent = q.rango_total;
-    $("[data-q-unidad]").textContent = `Equipos e instalación · ≈ ${q.rango_m2} por m²`;
-    const msg = `Hola JM, soy ${q.nombre}. Quiero avanzar con mi cotización ${q.folio}: ${describe(s)}, ${q.soluciones.toLowerCase()}. Estimado: ${q.rango_total}.`;
-    $("[data-q-wa]").href = `https://wa.me/${CONFIG.whatsappJM}?text=${encodeURIComponent(msg)}`;
-  }
-
-  $("[data-q-print]").addEventListener("click", () => {
-    document.body.classList.add("print-quote");
-    window.print();
-    setTimeout(() => document.body.classList.remove("print-quote"), 500);
-  });
-  $("[data-q-new]").addEventListener("click", () => {
-    quote.hidden = true; lead.reset(); lead.hidden = true;
+  $("[data-thanks-new]").addEventListener("click", () => {
+    thanks.hidden = true; lead.reset();
     $("#calculadora").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
   });
 }

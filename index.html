@@ -13,13 +13,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="preload" as="image" href="Assets/torre.jpg" fetchpriority="high">
-<link rel="stylesheet" href="css/landing_v04.css">
+<link rel="preload" as="image" href="Assets/app_lifesmart.jpg" fetchpriority="high">
+<link rel="stylesheet" href="css/landing_v05.css">
 <link rel="stylesheet" href="css/prototipo.css">
 <script>document.documentElement.classList.remove("no-js")</script>
 </head>
 <body>
-<div class="proto-bar" role="note"><span class="proto-dot" aria-hidden="true"></span>Prototipo · datos de ejemplo<span class="proto-more"> · precios, contacto y especificaciones por validar</span></div>
+<div class="proto-bar" role="note"><span class="proto-dot" aria-hidden="true"></span>Prototipo · datos de ejemplo<span class="proto-more"> · precios y especificaciones por validar</span></div>
 
 <!-- Iconos Lucide (ISC) — mismo set que el stand -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -39,6 +39,7 @@
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
   </defs>
 </svg>
@@ -82,15 +83,14 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span class="nw">Construmedia 2026</span> · <span class="nw">Stand 68</span> · <span class="nw">13–15 nov</span></p>
         <h1 class="display">Una orden.<br>Y todo responde.</h1>
-        <p class="lead">Con tu voz, un panel o la app: luz, música, clima, cortinas, accesos y cámaras en un solo sistema. Domótica y seguridad LifeSmart, diseñadas e instaladas por JM&nbsp;Security&nbsp;System.</p>
+        <p class="lead">Tu casa entera desde una app. Domótica y seguridad LifeSmart, instalada por JM.</p>
         <div class="actions">
           <a class="btn" href="#calculadora">Calcula tu proyecto</a>
           <a class="link" href="#sistema">Conoce el sistema <svg class="i"><use href="#i-arrow"/></svg></a>
         </div>
-        <p class="hero-note">Para tu casa, tu apartamento o tu proyecto: constructoras, desarrolladores, arquitectos e interioristas.</p>
       </div>
       <figure class="hero-media">
-        <img src="Assets/torre.jpg" width="1800" height="2235" alt="Corte isométrico de un edificio residencial con un apartamento abierto y el cableado del sistema domótico resaltado en naranja." fetchpriority="high">
+        <img src="Assets/app_lifesmart.jpg" width="1400" height="1738" alt="Teléfono con la app LifeSmart abierta en la pantalla de escenas: Buenos días, Ausente, Bienvenido a casa, Buenas noches, Modo romántico y Fiesta en casa." fetchpriority="high">
       </figure>
     </div>
   </section>
@@ -378,15 +378,15 @@
             <p class="summary-v" data-sum-range>US$ —</p>
             <p class="summary-u" data-sum-unit>equipos e instalación</p>
           </div>
-          <button class="btn btn-block" type="button" data-open-lead>Recibir cotización preliminar</button>
-          <p class="summary-f">Gratis y sin compromiso. Con folio para tu visita al Stand 68.</p>
+          <button class="btn btn-block" type="button" data-open-lead>Solicitar cotización</button>
+          <p class="summary-f">Gratis y sin compromiso. Un asesor de JM te contacta.</p>
         </aside>
       </div>
 
       <form class="leadform" id="cotizacion" novalidate data-lead hidden>
         <div class="lead-head">
           <p class="label"><span>4</span> Tus datos</p>
-          <h3 class="h3">¿A quién le enviamos la cotización?</h3>
+          <h3 class="h3">¿Cómo te contactamos?</h3>
           <p data-lead-sum></p>
         </div>
         <div class="fields">
@@ -409,42 +409,22 @@
         </div>
         <label class="check"><input type="checkbox" name="ok" required><span>Acepto que JM Security System guarde mis datos y me contacte sobre esta cotización.</span></label>
         <div class="lead-actions">
-          <button class="btn" type="submit" data-lead-submit>Generar mi cotización</button>
+          <button class="btn" type="submit" data-lead-submit>Enviar solicitud</button>
           <p class="lead-err" data-lead-err role="alert"></p>
         </div>
       </form>
 
-      <!-- Cotización preliminar (se rellena con JS; también es la vista de impresión/PDF) -->
-      <article class="quote" id="cotizacion-lista" data-quote hidden aria-labelledby="quote-t">
-        <header class="quote-head">
-          <div class="quote-brand">
-            <img src="Assets/lifesmart_trim.png" alt="LifeSmart" width="1289" height="261" class="q-ls">
-            <span class="lockup-div" aria-hidden="true"></span>
-            <img src="Assets/jm_blanco.svg" alt="JM Security System" width="719" height="319" class="q-jm">
-          </div>
-          <div class="quote-folio"><span>Folio</span><b data-q-folio>—</b></div>
-        </header>
-        <h3 id="quote-t" class="h3">Cotización preliminar</h3>
-        <p class="quote-for" data-q-for></p>
-        <dl class="quote-grid">
-          <div><dt>Proyecto</dt><dd data-q-proyecto></dd></div>
-          <div><dt>Soluciones</dt><dd data-q-capas></dd></div>
-          <div><dt>Equipos estimados</dt><dd data-q-equipos></dd></div>
-          <div><dt>Fecha</dt><dd data-q-fecha></dd></div>
-        </dl>
-        <div class="quote-total">
-          <p class="summary-k">Inversión estimada<sup>1</sup></p>
-          <p class="quote-v" data-q-rango></p>
-          <p class="quote-u" data-q-unidad></p>
+      <!-- Confirmación: la solicitud viaja al correo de JM; el cliente solo ve el gracias y el atajo a WhatsApp -->
+      <div class="thanks" id="solicitud-recibida" data-thanks hidden tabindex="-1" aria-labelledby="thanks-t">
+        <span class="thanks-mark" aria-hidden="true"><svg class="i"><use href="#i-check"/></svg></span>
+        <h3 id="thanks-t" class="h3" data-thanks-t>¡Gracias! Ya estamos revisando tu proyecto.</h3>
+        <p>Te escribimos muy pronto. ¿Lo hablamos ahora?</p>
+        <div class="thanks-actions">
+          <a class="btn btn-wa" href="#" target="_blank" rel="noopener" data-thanks-wa><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Escríbenos por WhatsApp</a>
+          <button class="link link-dark" type="button" data-thanks-new>Calcular otro proyecto</button>
         </div>
-        <p class="quote-next">Próximo paso: un asesor de JM te escribe por WhatsApp para agendar la visita técnica. Presenta este folio en el <b>Stand 68</b> del Salón Regency y recibe una demo personalizada.</p>
-        <div class="quote-actions no-print">
-          <button class="btn" type="button" data-q-print>Descargar PDF</button>
-          <a class="btn btn-ghost-dark" href="#" target="_blank" rel="noopener" data-q-wa>Enviar por WhatsApp</a>
-          <button class="link link-dark" type="button" data-q-new>Calcular otro proyecto</button>
-        </div>
-        <p class="quote-legal">Valores de referencia; validez de 15 días. La cotización formal se emite tras la visita técnica.</p>
-      </article>
+        <p class="thanks-folio">Folio <b data-thanks-folio>—</b> · Preséntalo en el stand 68</p>
+      </div>
     </div>
   </section>
 
@@ -497,6 +477,7 @@
           <div><dt>Dónde</dt><dd>Salón Regency, fila superior. Hotel Dominican Fiesta, Santo Domingo</dd></div>
           <div><dt>Fechas</dt><dd>13–15 de noviembre de 2026</dd></div>
           <div><dt>En vivo</dt><dd>Cerradura C100, panel Nature, Nature X, interruptores Blend y el sensor de movimiento con sirena</dd></div>
+          <div><dt>Contacto</dt><dd><a href="https://wa.me/18094752210" target="_blank" rel="noopener">WhatsApp 809-475-2210</a> · <a href="https://www.instagram.com/jmsecuritysystem/" target="_blank" rel="noopener">@jmsecuritysystem</a></dd></div>
         </dl>
         <div class="actions">
           <a class="btn btn-ghost" href="#" data-ics>Añadir al calendario</a>
@@ -524,8 +505,9 @@
       </nav>
       <div>
         <h4>Contacto</h4>
-        <a href="#">WhatsApp +1 809 000 0000</a>
-        <a href="#">info@jmsecuritysystem.com</a>
+        <a href="https://wa.me/18094752210" target="_blank" rel="noopener">WhatsApp 809-475-2210</a>
+        <a href="https://www.instagram.com/jmsecuritysystem/" target="_blank" rel="noopener">Instagram @jmsecuritysystem</a>
+        <a href="mailto:info@jmsecuritysystem.com">info@jmsecuritysystem.com</a>
         <p>Santo Domingo, República Dominicana</p>
       </div>
       <div>
@@ -541,6 +523,6 @@
   </div>
 </footer>
 
-<script src="js/landing_v04.js" defer></script>
+<script src="js/landing_v05.js" defer></script>
 </body>
 </html>

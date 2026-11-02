@@ -1,4 +1,4 @@
-/* JM × LifeSmart · Landing Construmedia 2026 · v04 (v03 + calculadora Hogar/Negocio, casa de 2 plantas, Nature X propio, mapa de la feria)
+/* JM × LifeSmart · Landing Construmedia 2026 · v05 (v04 + hero claro con la app, contacto real, solicitud por correo con gracias + WhatsApp)
    Sistema: negro de marca + naranja LifeSmart como acento escaso (<5 %), Manrope + IBM Plex Mono,
    hairlines de 1 px y retícula de 12 columnas. Todo el sitio consume estos tokens. */
 
@@ -628,3 +628,44 @@ sup { font-size: .6em; vertical-align: super; line-height: 0; }
   .fm-stands text { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .fm-pulse, .proto-iso .is-new { animation: none; } }
+
+
+/* =========================================================
+   v05 · Hero claro: tagline + una línea + la app LifeSmart sobre blanco
+   ========================================================= */
+.hero { background: #fff; color: var(--ink-dark); border-bottom: 1px solid var(--line-dark); }
+.hero .eyebrow { color: var(--ink-dark-2); }
+.hero .lead { color: var(--ink-dark-2); max-width: 30ch; }
+.hero .link { color: var(--ink-dark); }
+.hero-copy { grid-column: 1 / span 6; }
+.hero-media { grid-column: 7 / span 6; margin-right: 0; }
+.hero-media img { inset: var(--s6) 0 var(--s4); width: 100%; height: calc(100% - var(--s6) - var(--s4)); object-fit: contain; object-position: center;
+  -webkit-mask-image: none; mask-image: none; }
+
+/* Cabecera sobre el hero blanco (arriba del todo): logos y navegación en oscuro */
+.site-header.on-light .lockup-ls, .site-header.on-light .lockup-jm { filter: brightness(0); }
+.site-header.on-light .nav a { color: var(--ink-dark-2); }
+.site-header.on-light .nav a:hover, .site-header.on-light .nav a.is-active { color: var(--ink-dark); }
+.site-header.on-light .menu-bars, .site-header.on-light .menu-bars::before { background: var(--ink-dark); }
+
+/* =========================================================
+   v05 · Solicitud enviada: gracias + atajo a WhatsApp
+   ========================================================= */
+.thanks { margin-top: var(--s8); max-width: 640px; background: var(--bg); color: var(--ink); border-radius: var(--r-md);
+  padding: clamp(1.5rem, 1rem + 3vw, 3rem); display: grid; gap: var(--s4); outline: none; }
+.thanks-mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: rgba(242, 140, 60, .14); color: var(--accent); }
+.thanks-mark .i { width: 22px; height: 22px; stroke-width: 2; }
+.thanks .h3 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem); letter-spacing: -.025em; line-height: 1.15; text-wrap: balance; }
+.thanks > p { color: var(--ink-2); }
+.thanks-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s5); margin-top: var(--s2); }
+.btn-wa .i { width: 1.15em; height: 1.15em; stroke-width: 2; }
+.thanks-folio { font-family: var(--mono); font-size: var(--fs-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.thanks-folio b { color: var(--accent); font-weight: 500; }
+.facts dd a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255, 255, 255, .3); }
+.facts dd a:hover { text-decoration-color: var(--accent); }
+
+@media (max-width: 760px) {
+  .hero-copy, .hero-media { grid-column: 1; }
+  .hero-media { margin: 0 calc(var(--gutter) * -1); aspect-ratio: 1 / 1; }
+  .hero-media img { inset: 0; height: 100%; }
+}
