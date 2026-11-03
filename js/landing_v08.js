@@ -781,6 +781,13 @@ function initProducts() {
   dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 }
 
+/* Barra inferior y WhatsApp flotante: aparecen cuando los botones del hero salen de pantalla */
+function initDock() {
+  const cta = $(".hero-actions"); if (!cta || !("IntersectionObserver" in window)) return;
+  document.body.classList.add("hero-cta");
+  new IntersectionObserver(([en]) => document.body.classList.toggle("hero-cta", en.isIntersecting), { rootMargin: "-64px 0px 0px 0px" }).observe(cta);
+}
+
 /* ---------- 6 · Stand, calendario, WhatsApp y redes ---------- */
 
 function initContact() {
@@ -808,4 +815,4 @@ function initReveal() {
   els.forEach(e => io.observe(e));
 }
 
-initTracking(); initHeader(); initHero(); initKits(); initCalc(); initSol(); initProducts(); initContact(); initReveal();
+initTracking(); initHeader(); initHero(); initDock(); initKits(); initCalc(); initSol(); initProducts(); initContact(); initReveal();

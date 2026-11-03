@@ -1035,3 +1035,12 @@ body.menu-open .site-header { background: var(--bg); backdrop-filter: none; -web
   .section-head { margin-bottom: var(--s7); }
   .faq-grid { row-gap: var(--s7); }
 }
+
+/* ===== v08 · Acciones sin duplicar: mientras se ven los botones del hero, la barra inferior
+   (celular) y el WhatsApp flotante (escritorio) esperan; al bajar, entran y siguen al usuario ===== */
+.wa-float { transition: transform var(--t) var(--ease), opacity var(--t) var(--ease), visibility 0s, box-shadow var(--t-fast); }
+body.hero-cta .wa-float { transform: translateY(24px) scale(.9); opacity: 0; visibility: hidden; transition: transform var(--t) var(--ease), opacity var(--t) var(--ease), visibility 0s var(--t); }
+@media (max-width: 760px) {
+  body.hero-cta .mbar { transform: translateY(110%); }
+  .hero { height: 100svh; }
+}
