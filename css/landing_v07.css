@@ -987,3 +987,51 @@ body.menu-open .site-header { background: var(--bg); backdrop-filter: none; -web
   .site-header .lockup { min-height: 44px; }
 }
 @media (max-width: 760px) { .hero-actions { grid-template-columns: 1fr auto; } .hero-actions .btn { white-space: nowrap; padding: 0 var(--s4); } }
+
+/* ===== v07 · Correcciones del cliente 03-11 ===== */
+
+/* Encabezados de sección: misma separación etiqueta → título → bajada en todas */
+.section-head, .head-row > div:first-child, .stand-copy { row-gap: var(--s5); }
+.head-row > div:first-child { display: grid; }
+
+/* Botones naranjas: el icono toma el color del texto (sin verde WhatsApp sobre naranja) */
+.btn:not(.btn-wa):not(.btn-wa-ghost) .i,
+.leadform .btn .i, .ficha .btn .i, .stand .btn .i, .menu .btn .i { color: currentColor; }
+.btn { white-space: nowrap; }
+.btn .i { margin-left: -.15em; }
+.lead-actions .btn { padding-inline: var(--s6); }
+
+/* Productos: tarjeta seleccionada con trazo naranja */
+.pcard { box-shadow: inset 0 0 0 1px var(--line); }
+.pcard:hover, .pcard:focus-within, .pcard.is-active { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.pcard:hover { transform: translateY(-3px); }
+
+/* «En vivo»: cápsula translúcida flotante, esquina inferior derecha de la imagen, equidistante */
+.tag-live { top: auto; left: auto; right: var(--s3); bottom: var(--s3); padding: .35rem .7rem;
+  background: rgba(20, 18, 22, .42); -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16), 0 6px 18px rgba(0, 0, 0, .35); }
+.pcard-img img { inset: 7% 18% 25%; height: 68%; }
+
+@media (max-width: 760px) {
+  /* Carrusel a sangre: la tarjeta queda centrada y se asoman las vecinas a ambos lados */
+  .car-track { --card: 80vw; margin-inline: calc(var(--gutter) * -1); padding: 4px calc((100vw - var(--card)) / 2) var(--s2);
+    scroll-padding-inline: calc((100vw - var(--card)) / 2); gap: var(--s3); }
+  .pcard { flex: 0 0 var(--card); scroll-snap-align: center; opacity: .55; transition: opacity var(--t) var(--ease), box-shadow var(--t) var(--ease); }
+  .pcard.is-active { opacity: 1; }
+  .pcard:hover { transform: none; }
+  .pcard:hover:not(.is-active) { box-shadow: inset 0 0 0 1px var(--line); }
+  .tag-live { right: var(--s3); bottom: var(--s3); font-size: .75rem; padding: .3rem .6rem; }
+  /* Formulario: botón a todo el ancho, una sola línea */
+  .lead-actions { flex-direction: column; align-items: stretch; gap: var(--s3); }
+  .lead-actions .btn { width: 100%; padding-inline: var(--s4); }
+  .thanks-actions .btn, .stand .actions .btn { white-space: nowrap; }
+}
+
+/* Formulario: los 4 campos en una sola fila en escritorio, 2 × 2 en tableta */
+@media (min-width: 1081px) { .fields { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 761px) and (max-width: 1080px) { .fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Celular: misma distancia título → contenido en todas las secciones (FAQ incluida) */
+@media (max-width: 760px) {
+  .section-head { margin-bottom: var(--s7); }
+  .faq-grid { row-gap: var(--s7); }
+}

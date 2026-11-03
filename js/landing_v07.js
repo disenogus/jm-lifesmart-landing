@@ -750,6 +750,21 @@ function initProducts() {
   track_.addEventListener("touchstart", hold, { passive: true });
   new IntersectionObserver(([en]) => { visible = en.isIntersecting; loop(); }).observe(car);
 
+  // Celular: la tarjeta centrada queda seleccionada (trazo naranja)
+  const mq = matchMedia("(max-width: 760px)");
+  let raf = 0;
+  const mark = () => {
+    raf = 0;
+    if (!mq.matches) { items.forEach(el => el.classList.remove("is-active")); return; }
+    const mid = track_.getBoundingClientRect().left + track_.clientWidth / 2;
+    let best = items[0], d = Infinity;
+    items.forEach(el => { const r = el.getBoundingClientRect(), dd = Math.abs(r.left + r.width / 2 - mid); if (dd < d) { d = dd; best = el; } });
+    items.forEach(el => el.classList.toggle("is-active", el === best));
+  };
+  track_.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(mark); }, { passive: true });
+  mq.addEventListener("change", mark);
+  mark();
+
   // Ficha técnica
   const dlg = $("[data-ficha]");
   track_.addEventListener("click", e => {
