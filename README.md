@@ -1,6 +1,7 @@
-# JM × LifeSmart · Landing Construmedia 2026 (prototipo)
+# JM × LifeSmart · Landing Construmedia 2026
 
-Prototipo para revisión con el cliente. Datos de ejemplo: precios, contacto y especificaciones por validar.
-No indexado (noindex + robots.txt).
+Versión v06 para validación del cliente (correcciones del 02-11-26). No indexada (noindex + robots.txt) hasta el lanzamiento.
 
-Para producción: quitar `css/prototipo.css` y el bloque `.proto-bar` de `index.html`, y configurar `CONFIG.leadsEndpoint` en `js/landing_v05.js`.
+- Leads: pegar la URL del Apps Script en `CONFIG.leadsEndpoint` de `js/landing_v06.js` (instrucciones en la carpeta LEADS del proyecto).
+- Medición de clics: `CONFIG.ga4` con el ID de Google Analytics 4.
+- Para el lanzamiento: quitar `<meta name="robots">` de `index.html` y el `robots.txt`.
